@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>
+      Frontend Mentor | Huddle landing page with alternating feature blocks
+    </title>
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@600&display=swap");
+      :root {
+        /* Primary color */
+        --pink: hsl(322, 100%, 66%);
+
+        /* Neutral color */
+        --pale-cyan: hsl(193, 100%, 96%);
+        --dark-cyan: hsl(192, 100%, 9%);
+        --gray-blue: hsl(208, 11%, 55%);
+
+        /* font */
+        --open: "Open Sans", sans-serif;
+        --pop: "Poppins", sans-serif;
+
+        /* font weight */
+        --fw-regu: 400;
+        --fw-semibold: 600;
+        --fw-bold: 700;
+
+        /* border radius */
+        --bordr-radius: 1.5rem;
+      }
+
+      html {
+        font-size: 100%;
+        box-sizing: border-box;
+      }
+
+      *,
+      *::before,
+      *:after {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        box-sizing: inherit;
+        font-family: var(--open);
+      }
+
+      section {
+        width: 100%;
+      }
+
+      .wrapper {
+        padding: 2rem;
+      }
+
+      img {
+        width: 100%;
+        vertical-align: middle;
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
+      .btn a {
+        display: inline-block;
+        text-align: center;
+        background-color: white;
+        font-size: 0.5rem;
+        font-weight: var(--fw-semibold);
+        border-radius: calc(var(--bordr-radius) * 10);
+        box-shadow: 0 0.3rem 0.5rem -0.2rem rgb(199, 199, 199);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn a:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        background-color: white;
+        opacity: 0;
+        transition: 0.2s;
+      }
+
+      .btn a:hover:before {
+        opacity: 0.5;
+      }
+
+      .white-btn a {
+        padding-block: 0.3rem;
+      }
+
+      .white-btn a {
+        color: black;
+        font-size: 0.5rem;
+      }
+
+      .clr-btn a {
+        padding-block: 0.75rem;
+        background-color: var(--pink);
+      }
+
+      /* general setting
+      ------------------------------------------------------------------------------------------------------- */
+
+      /* header section start ------------------------------------------------------------------------------------------------------- */
+
+      .header {
+        background: no-repeat url("./images/bg-hero-mobile.svg") center/cover,
+          var(--pale-cyan);
+        text-align: center;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4rem;
+      }
+
+      .top-bar .logo {
+        width: 30%;
+      }
+
+      .top-bar .btn a {
+        padding-inline: 1.25rem;
+      }
+
+      .hero .heading {
+        padding-bottom: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .hero .clr-btn a {
+        padding-inline: 3rem;
+      }
+
+      .hero .txt {
+        padding-bottom: 3rem;
+      }
+
+      /* header section end ------------------------------------------------------------------------------------------------------- */
+
+      /* card section start ------------------------------------------------------------------------------------------------------- */
+
+      .card-sec {
+        padding-top: 2rem;
+        padding-bottom: 10rem;
+        position: relative;
+      }
+
+      .card-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .card {
+        background-color: white;
+        padding: 2.5rem;
+        text-align: center;
+        border-radius: var(--bordr-radius);
+        box-shadow: 0 0 1rem -0.2rem rgb(223, 223, 223);
+      }
+
+      .card-heading {
+        color: var(--dark-cyan);
+        font-weight: var(--fw-semibold);
+        padding-bottom: 1rem;
+      }
+
+      .card .img {
+        padding-bottom: 3rem;
+      }
+
+      .card .card-heading {
+        font-size: 1.2rem;
+      }
+
+      .card p {
+        font-size: 13px;
+        font-weight: var(--fw-regu);
+        color: var(--gray-blue);
+      }
+
+      .start-free-card {
+        position: absolute;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0;
+        transform: translateY(50%);
+        padding-inline: 1rem;
+        z-index: 100;
+      }
+
+      .start-free-card .btn a {
+        padding-inline: 2rem;
+      }
+
+      /* card section end ------------------------------------------------------------------------------------------------------- */
+
+      /* footer section start ------------------------------------------------------------------------------------------------------- */
+      .footer {
+        background-color: var(--dark-cyan);
+        color: white;
+        padding-top: 8rem;
+        color: var(--gray-blue);
+      }
+
+      .footer a {
+        color: var(--gray-blue);
+      }
+
+      .footer .logo {
+        width: 50%;
+        filter: brightness(0) invert(1);
+        padding-bottom: 1.5rem;
+      }
+
+      .footer .col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 3rem;
+      }
+
+      .footer li {
+        display: flex;
+      }
+
+      .footer li:nth-child(1) .icon {
+        align-self: flex-start;
+        margin-top: 0.3rem;
+      }
+
+      .footer .icon {
+        color: white;
+        align-self: center;
+        margin-right: 2rem;
+      }
+
+      .footer .social-group {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 1.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer .social-group a .social-icon {
+        color: white;
+        transition: 0.3s;
+      }
+
+      .footer .social-group a {
+        width: 2rem;
+        aspect-ratio: 1;
+        text-align: center;
+        line-height: 2rem;
+        border: 1px solid white;
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+
+      .footer .copy_right {
+        align-self: center;
+        font-size: 12px;
+      }
+
+      /* footer section end ------------------------------------------------------------------------------------------------------- */
+
+      /* RWD start ------------------------------------------------------------------------------------------------------- */
+
+      @media screen and (min-width: 830px) {
+        .wrapper {
+          padding-inline: 4rem;
+          max-width: 1200px;
+          margin: auto;
+        }
+
+        .header {
+          background: no-repeat url("./images/bg-hero-desktop.svg") top
+              center/contain,
+            var(--pale-cyan);
+          padding-block: 2rem;
+        }
+
+        .top-bar .logo {
+          width: 25%;
+          min-width: 10rem;
+          max-width: 16rem;
+        }
+
+        .top-bar .btn {
+          padding-block: 0.75rem;
+          padding-inline: 3rem;
+        }
+
+        .top-bar .btn a {
+          font-size: 0.9rem;
+        }
+
+        .hero {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .hero .txt {
+          flex: 3;
+          text-align: left;
+        }
+
+        .hero .txt .heading {
+          font-size: 2.1rem;
+        }
+
+        .hero .img {
+          flex: 4;
+        }
+
+        .card-sec {
+          padding-top: 5rem;
+        }
+
+        .card-wrap {
+          padding: 6rem;
+        }
+
+        .card {
+          display: flex;
+          align-items: center;
+          gap: 6rem;
+          padding-left: 8rem;
+        }
+
+        .card:nth-child(odd) .img {
+          order: 2;
+        }
+
+        .card .txt {
+          text-align: left;
+        }
+
+        .card .txt .card-heading {
+          font-size: 1.8rem;
+        }
+        .card .txt p {
+          font-size: 1rem;
+        }
+
+        .start-free-card {
+          margin: auto;
+          width: 50%;
+          max-width: 45rem;
+          flex-direction: column;
+          padding-left: 0;
+          gap: 1rem;
+          padding-top: 3rem;
+        }
+
+        .start-free-card .card-heading {
+          font-size: 1.8rem;
+        }
+
+        .start-free-card .btn {
+          border-radius: 100px;
+          padding-block: 1rem;
+          padding-inline: 3.5rem;
+        }
+
+        .start-free-card .btn a {
+          font-size: 1rem;
+        }
+
+        .footer-wrap {
+          padding-top: 5rem;
+          padding-right: 0;
+        }
+
+        .footer .logo {
+          width: 25%;
+          padding-bottom: 2rem;
+        }
+
+        .footer .grid {
+          display: flex;
+          justify-content: space-evenly;
+          gap: 6rem;
+        }
+
+        .footer .col {
+          padding-bottom: 0;
+        }
+
+        .footer .col:first-child {
+          flex: 4;
+          padding-bottom: 5rem;
+        }
+
+        .footer .col:nth-child(2) {
+          flex: 3;
+          flex-wrap: wrap;
+          height: 8rem;
+        }
+
+        .footer .col:nth-child(2) a {
+          position: relative;
+        }
+
+        .footer .col:nth-child(2) a:before {
+          content: "";
+          position: absolute;
+          bottom: -0.1rem;
+          height: 1px;
+          width: 100%;
+          background-color: var(--pale-cyan);
+          opacity: 0;
+        }
+
+        .footer .col:nth-child(2) a:hover:before {
+          opacity: 1;
+        }
+
+        .footer .col:last-child {
+          justify-content: space-between;
+          text-align: left;
+          flex: 3;
+        }
+
+        .footer .social-group {
+          justify-content: flex-start;
+        }
+
+        .footer .social-group a:hover {
+          border: 1px solid var(--pink);
+        }
+
+        .footer .social-group a:hover .social-icon {
+          color: var(--pink);
+        }
+
+        .footer .copy_right {
+          align-self: flex-start;
+        }
+      }
+      /* RWD end ------------------------------------------------------------------------------------------------------- */
+
+      footer {
+        background-color: var(--dark-cyan);
+      }
+
+      .attribution {
+        color: rgb(116, 116, 116);
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="sr-only">Huddle Landing Page</h1>
+
+      <section class="header">
+        <div class="header-wrap wrapper">
+          <div class="top-bar">
+            <div class="logo">
+              <img src="./images/logo.svg" alt="" />
+            </div>
+            <div class="btn white-btn">
+              <a href="#">Try It Free</a>
+            </div>
+          </div>
+          <div class="hero">
+            <div class="txt">
+              <h2 class="heading">Build The Community Your Fans Will Love</h2>
+              <p>
+                Huddle re-imagines the way we build communities. You have a
+                voice, but so does your audience. Create connections with your
+                users as you engage in genuine discussion.
+              </p>
+              <div class="btn clr-btn">
+                <a href="#">Get Started For Free</a>
+              </div>
+            </div>
+            <div class="img">
+              <img src="./images/illustration-mockups.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card-sec">
+        <div class="card-wrap wrapper">
+          <div class="card grow-tgt">
+            <div class="img">
+              <img src="./images/illustration-grow-together.svg" alt="" />
+            </div>
+            <div class="txt">
+              <h4 class="card-heading">Grow Together</h4>
+              <p>
+                Grow Together Generate meaningful discussions with your audience
+                and build a strong, loyal community. Think of the insightful
+                conversations you miss out on with a feedback form.
+              </p>
+            </div>
+          </div>
+
+          <div class="card flowing-con">
+            <div class="img">
+              <img
+                src="./images/illustration-flowing-conversation.svg"
+                alt=""
+              />
+            </div>
+            <div class="txt">
+              <h4 class="card-heading">Flowing Conversations</h4>
+              <p>
+                You wouldn't paginate a conversation in real life, so why do it
+                online? Our threads have just-in-time loading for a more natural
+                flow.
+              </p>
+            </div>
+          </div>
+
+          <div class="card yr-user">
+            <div class="img">
+              <img src="./images/illustration-your-users.svg" alt="" />
+            </div>
+            <div class="txt">
+              <h4 class="card-heading">Your Users</h4>
+              <p>
+                It takes no time at all to integrate Huddle with your app's
+                authentication solution. This means, once signed in to your app,
+                your users can start chatting immediately.
+              </p>
+            </div>
+          </div>
+
+          <div class="card start-free-card">
+            <h4 class="card-heading">Ready To Build Your Community?</h4>
+            <div class="btn clr-btn">
+              <a href="#">Get Started For Free</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="footer">
+        <div class="footer-wrap wrapper">
+          <div class="logo">
+            <img src="./images/logo.svg" alt="" />
+          </div>
+          <div class="grid">
+            <ul class="col">
+              <li>
+                <i class="icon fas fa-map-marker-alt"></i>
+                <p>
+                  lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor indcididunt ut labore et dolore magna aliqua
+                </p>
+              </li>
+              <li>
+                <i class="icon fas fa-phone"></i>
+                <p>+1-543-123-4567</p>
+              </li>
+              <li>
+                <i class="icon far fa-envelope"></i>
+                <p>example@huddle.com</p>
+              </li>
+            </ul>
+
+            <ul class="col">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">What We Do</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Career</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+
+            <ul class="col">
+              <li>
+                <div class="social-group">
+                  <a href="#"><i class="social-icon fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="social-icon fab fa-twitter"></i></a>
+                  <a href="#"><i class="social-icon fab fa-instagram"></i></a>
+                </div>
+              </li>
+              <li class="copy_right">
+                &copy; Copyright 2018 Huddle. All rights reserved.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Joe Jai</a>.
+      </p>
+    </footer>
+  </body>
+</html>
